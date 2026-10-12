@@ -1,4 +1,5 @@
 package es.safareyes.swapclosetmarlo.repositorios;
 
-public class IUsuarioRepository {
+public interface IUsuarioRepository {
+
 }

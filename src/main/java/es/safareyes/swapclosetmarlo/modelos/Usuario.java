@@ -2,6 +2,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 @Entity
 @Table(name = "usuario" ,schema = "swapcloset")
@@ -22,7 +23,7 @@ public class Usuario {
     private String contraseña;
 
 
-
+    @Getter
     @OneToOne(fetch = FetchType.LAZY)
     @JoinColumn(name="id_perfil",referencedColumnName = "id")
     private Perfil perfil;

@@ -2,12 +2,14 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
+import lombok.Getter;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
 import java.util.Set;
 
 @Entity
+@Getter
 @Table(name = "Perfil" ,schema = ("swapcloset"))
 public class Perfil {
 
@@ -39,6 +41,11 @@ public class Perfil {
     )
     private Set<Estilos> estilos = new HashSet<>();
 
+
+    @Getter
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "id_solicitud",referencedColumnName = "id")
+    private Solicitudes solicitudes;
 
 
 
