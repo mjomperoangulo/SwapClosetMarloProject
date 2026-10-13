@@ -5,6 +5,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -33,6 +35,9 @@ public class Prenda {
 
     @Column(name = "tipo")
     private Integer tipo;
+
+    @Column(name = "fecha_publicacion")
+    private Date fechaPublicacion;
 
     @Getter
     @ManyToOne(fetch = FetchType.LAZY)

@@ -33,7 +33,7 @@ class SwapClosetMarloApplicationTests {
     IMensajesRepository mensajesRepository;
 
 
-
+    //Primera consulta *FILTROS*
     @Test
     void buscarPorCiudad() {
 
@@ -114,21 +114,29 @@ class SwapClosetMarloApplicationTests {
 
 
 
+    //Segunda Consulta get
+
 
     @Test
     void probarDetallePrenda() {
         Prenda prenda = prendaRepository.findDetalleById(1);
 
         System.out.println(prenda);
+        System.out.println("Tiene estas fotos: " + prenda.getFotos().size());
 
-        System.out.println(prenda);
-        System.out.println("Tiene estas fotos"+prenda.getFotos().size());
-        System.out.println(prenda.getPerfil().getSolicitudes().getValoracion().getEstrellitas());
+        System.out.println(
+                "Estrellitas: " +
+                        prenda.getPerfil()
+                                .getSolicitudes()
+                                .getValoracion()
+                                .getEstrellitas()
+        );
     }
 
 
 
 
+    //Tercera Consulta get
 
     @Test
     void categoriasConNumeroPrendasDisponibles() {
@@ -148,7 +156,7 @@ class SwapClosetMarloApplicationTests {
 
 
 
-
+    //Cuarta consulta get
     @Test
     @Transactional
     void consultarPerfilPublico() {
@@ -189,7 +197,7 @@ class SwapClosetMarloApplicationTests {
 
 
 
-
+    //Quinta consulta get
     @Test
     @Transactional
     void consultarPerfilesRecomendados() {
@@ -214,7 +222,7 @@ class SwapClosetMarloApplicationTests {
 
 
 
-
+        //Sexta consulta get
         @Test
         void probarSolicitudesEnviadas() {
             List<Solicitudes> solicitudes =
@@ -232,6 +240,7 @@ class SwapClosetMarloApplicationTests {
         }
 
 
+        //Septima consulta get
         @Test
         void probarMensajesPaginados() {
             var pagina = mensajesRepository.buscarMensajesPorSolicitud(
@@ -244,6 +253,34 @@ class SwapClosetMarloApplicationTests {
             System.out.println("Total de páginas: " + pagina.getTotalPages());
             System.out.println("¿Hay página siguiente?: " + pagina.hasNext());
         }
+
+
+
+
+    //Ultima consulta
+    @Test
+    void contarOperacionesPorCategoriaYMes() {
+
+        List<EstadisticaCategoriaMes> resultados =
+                prendaRepository.contarOperacionesPorCategoriaYMes();
+
+        resultados.forEach(r -> System.out.println(
+                "Categoría: " + r.getCategoria()
+                        + " | Mes: " + r.getMes() + "/" + r.getAnio()
+                        + " | Tipo: " + r.getTipoOperacion()
+                        + " | Total: " + r.getTotalOperaciones()
+        ));
+    }
+
+
+
+
+
+
+
+
+
+
 
 
 

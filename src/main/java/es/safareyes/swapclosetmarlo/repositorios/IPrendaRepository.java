@@ -54,25 +54,29 @@ public interface IPrendaRepository extends JpaRepository<Prenda, Integer>, JpaSp
     );
 
 
+
+
     //Segunda consulta
     @Query("""
-           
-                SELECT DISTINCT p
-                FROM Prenda p
-                LEFT JOIN FETCH p.fotos
-                JOIN FETCH p.perfil perfil
-                LEFT JOIN FETCH perfil.solicitudes solicitud
-                LEFT JOIN FETCH solicitud.valoracion    
-                WHERE p.id = :id
-          
-        """)
+    SELECT DISTINCT p
+    FROM Prenda p
+    LEFT JOIN FETCH p.fotos
+    JOIN FETCH p.perfil perfil
+    LEFT JOIN FETCH perfil.solicitudes solicitud
+    LEFT JOIN FETCH solicitud.valoracion
+    WHERE p.id = :id
+    """)
     Prenda findDetalleById(@Param("id") Integer id);
     //2 consulta
     Prenda findPrendaById(Integer id);
 
 
     //Tercera consulta
+    //Aqui he buscado otra manera de hacerlo sin que sea List<Object> porque me suena que dijistes que no era
+    //optimo en una lista poner object porque quien te decia que era la primera posicion y la segunda
+    //no me acuerdo si lo dijistes para el set o list asi que te lo he hecho asi que sigue dando lo mismo
 
+    //Es una proyeccion es lo que yo he entendido
     @Query("""
     SELECT p.categoria.nombre as nombreCategoria, COUNT(p) as numeroPrendas
     FROM Prenda p
@@ -87,7 +91,35 @@ public interface IPrendaRepository extends JpaRepository<Prenda, Integer>, JpaSp
 
 
 
+    //Ultima consulta del get
 
+    @Query(value = """
+    SELECT
+        c.nombre AS categoria,
+        EXTRACT(YEAR FROM s.fechainicio)::INTEGER AS anio,
+        EXTRACT(MONTH FROM s.fechainicio)::INTEGER AS mes,
+        CASE
+            WHEN p.tipo = 1 THEN 'Intercambio'
+            WHEN p.tipo = 2 THEN 'Préstamo'
+            ELSE 'Desconocido'
+        END AS "tipoOperacion",
+        COUNT(DISTINCT s.id) AS "totalOperaciones"
+    FROM swapcloset.se_relaciona sr
+    JOIN swapcloset.prenda p
+        ON p.id = sr.id_prenda
+    JOIN swapcloset.categoria c
+        ON c.id = p.id_categoria
+    JOIN swapcloset.solicitudes s
+        ON s.id = sr.id_solicitud
+    WHERE p.estado <> 'Borrador'
+    GROUP BY
+        c.nombre,
+        EXTRACT(YEAR FROM s.fechainicio),
+        EXTRACT(MONTH FROM s.fechainicio),
+        p.tipo
+    ORDER BY anio, mes, categoria, p.tipo
+    """, nativeQuery = true)
+    List<EstadisticaCategoriaMes> contarOperacionesPorCategoriaYMes();
 
 
 
