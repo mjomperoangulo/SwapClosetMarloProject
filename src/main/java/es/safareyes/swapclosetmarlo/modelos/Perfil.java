@@ -3,6 +3,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 import jakarta.persistence.*;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -10,6 +11,7 @@ import java.util.Set;
 
 @Entity
 @Getter
+@Setter
 @Table(name = "Perfil" ,schema = ("swapcloset"))
 public class Perfil {
 
