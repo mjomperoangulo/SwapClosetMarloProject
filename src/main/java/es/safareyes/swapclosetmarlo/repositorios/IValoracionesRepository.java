@@ -1,4 +1,7 @@
 package es.safareyes.swapclosetmarlo.repositorios;
 
-public interface IValoracionesRepository {
+import es.safareyes.swapclosetmarlo.modelos.Valoraciones;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface IValoracionesRepository extends JpaRepository<Valoraciones, Integer> {
 }

@@ -1,11 +1,14 @@
 package es.safareyes.swapclosetmarlo.dtos;
 
-
-
 import lombok.Data;
 
 @Data
-public class MensajesDTO {
+public class CategoriaResponseDTO {
+
     private Integer id;
-    private String contenido;
+
+    private String nombre;
+
+
+
 }

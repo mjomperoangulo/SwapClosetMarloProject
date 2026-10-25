@@ -6,9 +6,8 @@ import lombok.Data;
 import java.util.Date;
 
 @Data
-public class SolicitudesDTO {
+public class SolicitudesRequestDTO {
 
-    private Integer id;
 
     private Date fechainicio;
 

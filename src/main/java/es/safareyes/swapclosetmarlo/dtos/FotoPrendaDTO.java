@@ -8,6 +8,7 @@ public class FotoPrendaDTO {
 
     private Integer id;
 
+
     private String url;
 
 }

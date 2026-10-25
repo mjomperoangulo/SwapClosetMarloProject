@@ -1,13 +1,11 @@
 package es.safareyes.swapclosetmarlo.dtos;
 
-
 import lombok.Data;
 
 import java.sql.Timestamp;
 
 @Data
-public class PerfilDTO {
-
+public class PerfilResponseDTO {
     private Integer id;
 
 
@@ -22,8 +20,9 @@ public class PerfilDTO {
 
     private Timestamp fechanacimiento;
 
-    private String Talla;
+    private String talla;
 
-    private String Email;
+    private String email;
+
 
 }
