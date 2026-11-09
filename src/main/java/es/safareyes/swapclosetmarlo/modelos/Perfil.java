@@ -2,8 +2,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.HashSet;
@@ -13,6 +12,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "Perfil" ,schema = ("swapcloset"))
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Perfil {
 
     @Id
@@ -27,13 +30,13 @@ public class Perfil {
     private String apellido2;
     @Column(name = "ciudad")
     private String ciudad;
-    @Column(name = "nombre")
+    @Column(name = "nombre", unique = true)
     private String nombre;
     @Column(name = "fechanacimiento")
     private Timestamp fechanacimiento;
     @Column(name = "Talla")
     private String Talla;
-    @Column(name = "Email")
+    @Column(name = "Email", unique = true)
     private String Email;
 
 

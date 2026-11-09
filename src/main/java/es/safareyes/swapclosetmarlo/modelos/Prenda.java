@@ -2,8 +2,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 import es.safareyes.swapclosetmarlo.repositorios.IPrendaRepository;
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.sql.Timestamp;
 import java.util.Date;
@@ -14,6 +13,10 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name = "prenda" ,schema = "swapcloset")
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
+
 public class Prenda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -2,11 +2,17 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.EqualsAndHashCode;
 import lombok.Getter;
+import lombok.NoArgsConstructor;
 
 @Entity
 @Getter
 @Table(name = "fotoprenda" ,schema = "swapcloset")
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class FotoPrenda {
     @Id

@@ -2,8 +2,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.Date;
 
@@ -12,6 +11,9 @@ import java.util.Date;
 @Getter
 @Setter
 @Table(name = "valoraciones" ,schema = ("swapcloset"))
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 
 
 public class Valoraciones {

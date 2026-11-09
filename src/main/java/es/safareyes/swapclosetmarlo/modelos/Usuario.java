@@ -2,12 +2,15 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Getter
 @Setter
+@EqualsAndHashCode
+@AllArgsConstructor
+@ToString
+@NoArgsConstructor
 @Table(name = "usuario" ,schema = "swapcloset")
 public class Usuario {
 

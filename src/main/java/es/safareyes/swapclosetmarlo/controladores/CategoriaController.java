@@ -58,6 +58,16 @@ public class CategoriaController {
         return ResponseEntity.noContent().build();
     }
 
+    //Eliminar segun el profesor
+
+    //DeleteMapping("/{id})
+    //public void eliminarLoqsea(@PathVariable Integer id){
+        //loqsea.eliminar(id);
+
+
+
+    //}
+
 
     //Hecho por profseor
     //@PostMapping
