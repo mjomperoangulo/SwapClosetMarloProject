@@ -49,7 +49,7 @@ public class UsuarioServicio {
     public UsuarioDTO create(RegistroUsuarioDTO dto) {
         Usuario usuario = usuarioMapper.toEntity(dto);
 
-        Usuario guardado = usuarioRepository.save(usuario);
+        Usuario guardado = registrarUsuario(usuario);
 
         return usuarioMapper.toDTO(guardado);
     }

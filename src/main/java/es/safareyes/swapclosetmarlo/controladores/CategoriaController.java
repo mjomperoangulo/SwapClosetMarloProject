@@ -4,6 +4,7 @@ package es.safareyes.swapclosetmarlo.controladores;
 import es.safareyes.swapclosetmarlo.dtos.CategoriaRequestDTO;
 import es.safareyes.swapclosetmarlo.servicios.CategoriaServicio;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,16 +36,16 @@ public class CategoriaController {
 
     // Crear una categoría
     @PostMapping("/crear")
-    public ResponseEntity<CategoriaRequestDTO> create(
+    public ResponseEntity<CategoriaRequestDTO> create(@Valid
             @RequestBody CategoriaRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(categoriaServicio.create(dto));
     }
 
     // Actualizar una categoría
-    @PutMapping("/actualizar")
+    @PutMapping("/actualizar/{id}")
     public ResponseEntity<CategoriaRequestDTO> update(
-            @PathVariable Integer id,
+            @PathVariable Integer id, @Valid
             @RequestBody CategoriaRequestDTO dto) {
         return ResponseEntity.ok(
                 categoriaServicio.update(id, dto)
@@ -52,7 +53,7 @@ public class CategoriaController {
     }
 
     // Eliminar una categoría
-    @DeleteMapping("/borrar")
+    @DeleteMapping("/borrar/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriaServicio.delete(id);
         return ResponseEntity.noContent().build();
