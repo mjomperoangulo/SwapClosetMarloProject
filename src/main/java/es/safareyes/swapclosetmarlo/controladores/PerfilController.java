@@ -4,7 +4,6 @@ package es.safareyes.swapclosetmarlo.controladores;
 import es.safareyes.swapclosetmarlo.dtos.PerfilRequestDTO;
 import es.safareyes.swapclosetmarlo.servicios.PerfilServicio;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,7 +33,6 @@ public class PerfilController {
 
     // POST: crear un perfil
     @PostMapping
-    @Valid
     @ResponseStatus(HttpStatus.CREATED)
     public PerfilRequestDTO create(
             @RequestBody PerfilRequestDTO dto) {
@@ -45,14 +43,14 @@ public class PerfilController {
     @PutMapping("/{id}")
     public PerfilRequestDTO update(
             @PathVariable Integer id,
-            @Valid @RequestBody PerfilRequestDTO dto) {
+            @RequestBody PerfilRequestDTO dto) {
         return perfilServicio.update(id, dto);
     }
 
     // DELETE: eliminar un perfil
     @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void delete(@Valid @PathVariable Integer id) {
+    public void delete(@PathVariable Integer id) {
         perfilServicio.delete(id);
     }
 }

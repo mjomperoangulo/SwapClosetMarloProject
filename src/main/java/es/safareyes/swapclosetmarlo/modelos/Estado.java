@@ -1,5 +1,5 @@
 package es.safareyes.swapclosetmarlo.modelos;
 
 public enum Estado {
-    disponible,prestada,usado,Segunda_mano,Borrador;
+    disponible,prestada,usado,Segunda_mano,Borrador,Retirada,Cancelada;
 }

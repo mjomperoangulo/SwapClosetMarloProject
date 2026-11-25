@@ -1,5 +1,6 @@
 package es.safareyes.swapclosetmarlo.repositorios;
 
+import es.safareyes.swapclosetmarlo.dtos.PrendaRequestDTO;
 import es.safareyes.swapclosetmarlo.modelos.Categoria;
 import es.safareyes.swapclosetmarlo.modelos.Estado;
 import es.safareyes.swapclosetmarlo.modelos.Perfil;
@@ -17,6 +18,9 @@ import java.util.List;
 import java.util.Optional;
 
 public interface IPrendaRepository extends JpaRepository<Prenda, Integer>, JpaSpecificationExecutor<Prenda> {
+
+
+
 
     List<Prenda> findByCategoria(Categoria categoria);
     List<Prenda>findByTipo(Integer tipo);

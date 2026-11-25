@@ -4,7 +4,6 @@ package es.safareyes.swapclosetmarlo.controladores;
 import es.safareyes.swapclosetmarlo.dtos.CategoriaRequestDTO;
 import es.safareyes.swapclosetmarlo.servicios.CategoriaServicio;
 
-import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -35,17 +34,17 @@ public class CategoriaController {
     }
 
     // Crear una categoría
-    @PostMapping("/crear")
-    public ResponseEntity<CategoriaRequestDTO> create(@Valid
+    @PostMapping
+    public ResponseEntity<CategoriaRequestDTO> create(
             @RequestBody CategoriaRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(categoriaServicio.create(dto));
     }
 
     // Actualizar una categoría
-    @PutMapping("/actualizar/{id}")
+    @PutMapping("/{id}")
     public ResponseEntity<CategoriaRequestDTO> update(
-            @PathVariable Integer id, @Valid
+            @PathVariable Integer id,
             @RequestBody CategoriaRequestDTO dto) {
         return ResponseEntity.ok(
                 categoriaServicio.update(id, dto)
@@ -53,29 +52,9 @@ public class CategoriaController {
     }
 
     // Eliminar una categoría
-    @DeleteMapping("/borrar/{id}")
+    @DeleteMapping("/{id}")
     public ResponseEntity<Void> delete(@PathVariable Integer id) {
         categoriaServicio.delete(id);
         return ResponseEntity.noContent().build();
     }
-
-    //Eliminar segun el profesor
-
-    //DeleteMapping("/{id})
-    //public void eliminarLoqsea(@PathVariable Integer id){
-        //loqsea.eliminar(id);
-
-
-
-    //}
-
-
-    //Hecho por profseor
-    //@PostMapping
-    //public void crearCategoria(@Valid @RequestBody CrearCategoriaDTO json){
-        //categoriaservices(
-
-    //}
-
-
 }

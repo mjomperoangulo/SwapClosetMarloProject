@@ -14,4 +14,6 @@ public interface MensajesMapper {
     Mensajes toEntity(MensajesRequestDTO dto);
 
     List<MensajesRequestDTO> toDtoList(List<Mensajes> all);
+
+
 }
