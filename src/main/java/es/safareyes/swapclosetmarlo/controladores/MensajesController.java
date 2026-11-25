@@ -4,6 +4,7 @@ package es.safareyes.swapclosetmarlo.controladores;
 import es.safareyes.swapclosetmarlo.dtos.MensajesRequestDTO;
 import es.safareyes.swapclosetmarlo.servicios.MensajesServicio;
 
+import jakarta.validation.Valid;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -29,14 +30,14 @@ public class MensajesController {
     // Obtener un mensaje por ID
     @GetMapping("/{id}")
     public ResponseEntity<MensajesRequestDTO> getById(
-            @PathVariable Integer id) {
+             @PathVariable Integer id) {
         return ResponseEntity.ok(mensajesServicio.getById(id));
     }
 
     // Crear un mensaje
     @PostMapping
     public ResponseEntity<MensajesRequestDTO> create(
-            @RequestBody MensajesRequestDTO dto) {
+          @RequestBody @Valid  MensajesRequestDTO dto) {
         return ResponseEntity.status(HttpStatus.CREATED)
                 .body(mensajesServicio.create(dto));
     }
@@ -45,7 +46,7 @@ public class MensajesController {
     @PutMapping("/{id}")
     public ResponseEntity<MensajesRequestDTO> update(
             @PathVariable Integer id,
-            @RequestBody MensajesRequestDTO dto) {
+            @Valid @RequestBody MensajesRequestDTO dto) {
         return ResponseEntity.ok(
                 mensajesServicio.update(id, dto)
         );
@@ -53,7 +54,7 @@ public class MensajesController {
 
     // Eliminar un mensaje
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> delete(@PathVariable Integer id) {
+    public ResponseEntity<Void> delete( @PathVariable Integer id) {
         mensajesServicio.delete(id);
         return ResponseEntity.noContent().build();
     }

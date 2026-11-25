@@ -3,6 +3,7 @@ package es.safareyes.swapclosetmarlo.controladores;
 
 import es.safareyes.swapclosetmarlo.dtos.ValoracionesRequestDTO;
 import es.safareyes.swapclosetmarlo.servicios.ValoracionesServicio;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -32,14 +33,14 @@ public class ValoracionesController {
 
     @PostMapping
     public ResponseEntity<ValoracionesRequestDTO> create(
-            @RequestBody ValoracionesRequestDTO dto) {
+            @Valid @RequestBody ValoracionesRequestDTO dto) {
         return ResponseEntity.ok(valoracionesServicio.create(dto));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<ValoracionesRequestDTO> update(
             @PathVariable Integer id,
-            @RequestBody ValoracionesRequestDTO dto) {
+            @Valid @RequestBody ValoracionesRequestDTO dto) {
         return ResponseEntity.ok(valoracionesServicio.update(id, dto));
     }
 

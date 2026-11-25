@@ -43,6 +43,38 @@ public class CategoriaServicio {
         return categoriaMapper.toDto(categoria);
     }
 
+
+    //EL post hecho por profesor
+
+    //public void CategoriaEspecie(CrearEspecieDTO dto){
+
+    // Categoria nuevaCategoria = categoriaMapper.toEntity(dto);
+
+    //con conversor del mapper
+    //
+
+
+    //categoriaRepository.save();
+
+    //}
+
+    //Condiciones para las relaciones
+
+    //TipoOrganismo tipoOrganismo = tipoOrganismoRepositort
+        //.findby(dto.idTipoOrganismo()).orElse(null);
+
+    //Otra forma de capturar los errores
+
+    //if(tipoOrganismo == null){
+    //  throw new CategoriaNoEncontrada("El tipo de categoria indicado no existe");
+    //}
+
+    //Si ha pasado todas estas condiciones y no da error
+    //nuevaCategoria.setCategoria(categoria);
+    //nuevaCategoria.setTipoCategoria(tipoCategoria);
+
+
+
     // Crear una categoría
     @Transactional
     public CategoriaRequestDTO create(CategoriaRequestDTO dto) {
@@ -51,6 +83,12 @@ public class CategoriaServicio {
 
         return categoriaMapper.toDto(guardada);
     }
+
+
+
+
+
+
 
     // Actualizar una categoría
     @Transactional

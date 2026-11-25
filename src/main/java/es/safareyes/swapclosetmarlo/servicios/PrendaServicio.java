@@ -85,4 +85,32 @@ public class PrendaServicio {
 
         iPrendaRepository.deleteById(id);
     }
+
+    //eliminar profesro
+
+    //public void eliminar(Integer id){
+
+    //validacion
+
+    //Especie especie = especieRepository.findById(id).orElse(null);
+    //Tipo Organismo tipoOrganismoPez = tipoOrganismoRepository.findFirstByCodigo("PEZ"); esto es un query de un repositorio
+
+    //if(especie!=null){
+
+    //especie-getTipoOrganismo().equals(tipoOrganismoPez){
+    //especieRepository.deletebyId(id);
+
+    //}else{
+        //throw new ReglaNegocioException("No se puede elminiar una especie del tipo PEZ");
+    //}
+
+
+        //}
+
+
+
+
+
+
+
 }

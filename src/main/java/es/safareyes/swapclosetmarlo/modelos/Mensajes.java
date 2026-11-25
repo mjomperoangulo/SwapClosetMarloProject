@@ -2,8 +2,7 @@ package es.safareyes.swapclosetmarlo.modelos;
 
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -12,6 +11,9 @@ import java.util.Set;
 @Getter
 @Setter
 @Table(name="mensajes", schema = "swapcloset")
+@EqualsAndHashCode
+@AllArgsConstructor
+@NoArgsConstructor
 
 public class Mensajes {
     @Id
