@@ -22,8 +22,8 @@ public class PrendaController {
     }
 
     @PostMapping("/crear")
-    public PrendaRequestDTO create(@RequestParam Integer idPerfil, @RequestBody PrendaRequestDTO dto) {
-        return prendaServicio.create(dto, idPerfil);
+    public PrendaRequestDTO create(@RequestParam Integer idPerfil, @RequestParam Integer idCategoria, @RequestBody PrendaRequestDTO dto) {
+        return prendaServicio.create(dto, idPerfil,idCategoria);
 
 
     }

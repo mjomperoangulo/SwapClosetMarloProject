@@ -60,13 +60,14 @@ public class PrendaServicio {
 
     // Crear una prenda
     @Transactional
-    public PrendaRequestDTO create(PrendaRequestDTO dto, Integer idPerfil) {
+    public PrendaRequestDTO create(PrendaRequestDTO dto, Integer idPerfil,Integer idCategoria) {
         Prenda prenda = prendaMapper.toEntity(dto);
 
         Perfil perfil = iPerfilRepository.findById(idPerfil)
                         .orElseThrow(() -> new RuntimeException("No existe ese perfil"));
 
-        Categoria categoria = iCategoriaRepository.findById(idPerfil)
+
+        Categoria categoria = iCategoriaRepository.findById(idCategoria)
                         .orElseThrow(() -> new RuntimeException("No existe ese categoria"));
 
         prenda.setPerfil(perfil);

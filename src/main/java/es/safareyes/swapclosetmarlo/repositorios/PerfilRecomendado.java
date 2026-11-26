@@ -10,4 +10,5 @@ public interface PerfilRecomendado {
     Long getEstilosComunes();
 
     Double getReputacionMedia();
+
 }

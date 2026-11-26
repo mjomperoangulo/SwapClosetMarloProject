@@ -12,6 +12,9 @@ import es.safareyes.swapclosetmarlo.repositorios.ISolicitudesRepository;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.time.LocalDate;
+import java.time.ZoneId;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 @Service
@@ -68,10 +71,82 @@ public class SolicitudesServicio {
             throw new SolicitudNoValida("No puedes solicitar una prenda propia");
         }
 
+        //Comprobacion de si es intercambio o prestamo y si no lo es manda una excepcion (RN-05)
+        if(prenda.getTipo() != 1 && prenda.getTipo() !=2){
+            throw new SolicitudNoValida("La modalidad de la prenda no admite este tipo de solicitud");
+        }
+
         if(iSolicitudesRepository.existeSolicitudPendiente(idPrenda)){
             //Error 409 aplicacion
             throw new ConflictoSolicitud("Ya existe una solicitud que esta pendiente para esta prendwa");
         }
+
+
+        //Si es prestamo (RN-05)
+        if(prenda.getTipo() == 2){
+            if(iSolicitudesRepository.contarPrestamosActivos(idPerfil) >= 3){
+                throw new SolicitudNoValida("Has superado el maximo de 3 prestamos activos");
+            }
+
+            if(dto.getFechainicio() == null || dto.getFechafin() == null){
+                throw new SolicitudNoValida("Las fechas son obligatorias en el prestamo");
+
+
+            }
+
+
+            LocalDate inicio = dto.getFechainicio().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
+
+            LocalDate fin = dto.getFechafin().toInstant()
+                    .atZone(ZoneId.systemDefault()).toLocalDate();
+
+            LocalDate hoy = LocalDate.now();
+
+            if(inicio.isBefore(hoy)){
+                throw new SolicitudNoValida("La fecha de inicio no puede ser anterior a hoy");
+            }
+
+            if(!fin.isAfter(inicio)){
+                throw new SolicitudNoValida("La fecha de fin debe ser posterior al inicio");
+            }
+
+            if(ChronoUnit.DAYS.between(inicio,fin) > 30){
+                throw new SolicitudNoValida("Un préstamo no puede pasar los 30 dias");
+            }
+
+        }
+        //Si la prenda es intercambio (RN-05)
+        if(prenda.getTipo() == 1){
+
+            if(dto.getIdPrendaOfrecida() == null){
+                throw new SolicitudNoValida("Debes indicar una prenda para ofrecer");
+            }
+
+            if(dto.getIdPrendaOfrecida().equals(idPrenda)){
+                throw new SolicitudNoValida("No puedes ofrecer la misma prenda que estas solicitando");
+            }
+
+            Prenda prendaOfrecida = iPrendaRepository.findById(dto.getIdPrendaOfrecida()).orElseThrow(() -> new PrendaNoEncontrada("No existe la prenda ofrecida"));
+
+
+
+            if(!prendaOfrecida.getPerfil().getId().equals(perfil.getId())){
+                throw new SolicitudNoValida("La prenda ofrecida no la tiene el usuario");
+
+            }
+
+            if (iSolicitudesRepository.existeSolicitudPendiente(dto.getIdPrendaOfrecida())) {
+                throw new ConflictoSolicitud("La prenda ofrecida ya tiene una solicitud pendiente");
+            }
+
+            if(prendaOfrecida.getEstado() != Estado.disponible){
+                throw new SolicitudNoValida("La prenda ofrecida no esta disponible");
+            }
+
+
+
+        }
+
 
 
 
@@ -85,6 +160,9 @@ public class SolicitudesServicio {
         Solicitudes guardada = iSolicitudesRepository.save(solicitud);
 
         iSolicitudesRepository.relacionarPrenda(idPrenda, guardada.getId());
+        if(prenda.getTipo() == 1){
+            iSolicitudesRepository.relacionarPrenda(dto.getIdPrendaOfrecida(), guardada.getId());
+        }
 
 
         return solicitudesMapper.toDto(guardada);

@@ -68,4 +68,36 @@ public interface ISolicitudesRepository extends JpaRepository<Solicitudes,Intege
     )
     """, nativeQuery = true)
     void cancelarSolicitudesPendientes(@Param("idPrenda") Integer idPrenda);
+
+
+
+
+    // Contar todos los prestamos activos de un perfil como solicitante (RN-05)
+    @Query(value = """
+    SELECT COUNT(*)
+    FROM swapcloset.solicitudes s
+    JOIN swapcloset.se_relaciona sr ON sr.id_solicitud = s.id
+    JOIN swapcloset.prenda p ON p.id = sr.id_prenda
+    WHERE s.id_perfil_emisor = :idPerfil
+    AND p.id_perfil = s.id_perfil_receptor
+    AND p.tipo = 2
+    AND s.estado = 'Aceptado'
+    AND s.fechafin >= CURRENT_DATE
+    """, nativeQuery = true)
+    Integer contarPrestamosActivos(@Param("idPerfil") Integer idPerfil);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 }
