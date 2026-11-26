@@ -14,9 +14,4 @@ public interface CategoriaMapper {
         Categoria toEntity(CategoriaRequestDTO dto);
 
         List<CategoriaRequestDTO> toDtoList(List<Categoria> all);
-
-
-        //Categoria toEntity(CrearCategoriaDTO dto);
-
-
 }

@@ -5,7 +5,6 @@ import es.safareyes.swapclosetmarlo.dtos.RegistroUsuarioDTO;
 import es.safareyes.swapclosetmarlo.dtos.UsuarioDTO;
 import es.safareyes.swapclosetmarlo.servicios.UsuarioServicio;
 
-import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -34,14 +33,14 @@ public class UsuarioController {
 
     @PostMapping
     public ResponseEntity<UsuarioDTO> create(
-            @Valid @RequestBody RegistroUsuarioDTO dto) {
+            @RequestBody RegistroUsuarioDTO dto) {
         return ResponseEntity.ok(usuarioServicio.create(dto));
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<UsuarioDTO> update(
             @PathVariable Integer id,
-           @Valid @RequestBody UsuarioDTO dto) {
+            @RequestBody UsuarioDTO dto) {
         return ResponseEntity.ok(usuarioServicio.update(id, dto));
     }
 

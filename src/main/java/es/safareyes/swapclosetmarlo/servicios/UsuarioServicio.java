@@ -10,13 +10,13 @@ import es.safareyes.swapclosetmarlo.repositorios.IUsuarioRepository;
 
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
-import es.safareyes.swapclosetmarlo.errores.ConflictException;
 
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 public class UsuarioServicio {
+
     private final IUsuarioRepository usuarioRepository;
     private final UsuarioMapper usuarioMapper;
 
@@ -49,7 +49,7 @@ public class UsuarioServicio {
     public UsuarioDTO create(RegistroUsuarioDTO dto) {
         Usuario usuario = usuarioMapper.toEntity(dto);
 
-        Usuario guardado = registrarUsuario(usuario);
+        Usuario guardado = usuarioRepository.save(usuario);
 
         return usuarioMapper.toDTO(guardado);
     }
@@ -81,22 +81,4 @@ public class UsuarioServicio {
 
         usuarioRepository.deleteById(id);
     }
-
-@Transactional
-public Usuario registrarUsuario(Usuario usuario){
-
-    if(usuarioRepository.existsByPerfil_Email(usuario.getPerfil().getEmail())){
-        throw new ConflictException("Email ya registrado");
-    }
-
-    if(usuarioRepository.existsByNombre(usuario.getNombre())){
-        throw new ConflictException("Usuario ya registrado");
-
-    }
-
-    return usuarioRepository.save(usuario);
-}
-
-
-
 }

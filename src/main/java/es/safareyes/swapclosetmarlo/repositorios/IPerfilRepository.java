@@ -12,7 +12,6 @@ import java.util.*;
 
 @Repository
 public interface IPerfilRepository extends JpaRepository<Perfil, Integer> {
-    boolean existsByEmail(String email);
 
     @Query(value = """
         WITH estilos_del_perfil AS (

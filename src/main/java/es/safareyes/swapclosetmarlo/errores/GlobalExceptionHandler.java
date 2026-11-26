@@ -138,4 +138,47 @@ public class GlobalExceptionHandler {
     }
 
 
+    //Regla de negocio 4 RN-04
+    @ExceptionHandler(ConflictoSolicitud.class)
+    public ResponseEntity<ErrorResponse> handleConflictoSolicitud(
+            ConflictoSolicitud ex,
+            HttpServletRequest request) {
+
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                HttpStatus.CONFLICT.value(),
+                "Conflicto en la solicitud",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity
+                //Aqui el httpStatusConflict representa el codigo http 409
+                .status(HttpStatus.CONFLICT)
+                .body(error);
+    }
+
+
+    @ExceptionHandler(SolicitudNoValida.class)
+    public ResponseEntity<ErrorResponse> handleSolicitudNoValida(
+            SolicitudNoValida ex,
+            HttpServletRequest request) {
+
+        ErrorResponse error = new ErrorResponse(
+                LocalDateTime.now(),
+                //Aqui el error 422 Unprocessable_Entity
+                HttpStatus.UNPROCESSABLE_ENTITY.value(),
+                "Solicitud no válida",
+                ex.getMessage(),
+                request.getRequestURI()
+        );
+
+        return ResponseEntity
+                .status(HttpStatus.UNPROCESSABLE_ENTITY)
+                .body(error);
+    }
+
+
+
+
 }
