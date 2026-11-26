@@ -20,10 +20,7 @@ public class SolicitudesRequestDTO {
     @Future(message = "La fecha de fin debe ser futura")
     private Date fechafin;
 
-    @Pattern(
-            regexp = "Aceptado|Rechazado|Pendiente|Completada|Finalizada",
-            message = "El estado de la solicitud no es válido"
-    )
+    @Pattern(regexp = "Aceptado|Rechazado|Pendiente|Completada|Finalizada", message = "El estado de la solicitud no es válido")
     private estadoSolicitud estadoSolicitud;
 
 }

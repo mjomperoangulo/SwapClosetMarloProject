@@ -20,7 +20,6 @@ public class ValoracionesRequestDTO {
     private Integer estrellitas;
 
     @FutureOrPresent(message = "la fecha no puede ser anterior a hoy")
-
     private Date fecha;
 
 }
